@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  type="text/css" href="api.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Weather APP</title>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h2><i class="fa fa-map-marker"> <span id="location"></span></i></h2>
+        <h6 id="Weather"></h6>
+        <h4><span id="temp"></span><sup>o</sup>C</h4>
+        <img src="" id="icon">
+        <button onclick="window.location.reload()" class="refresh"><i class="fa fa-refresh"></i></button>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script type="text/javascript">link ="https://api.openweathermap.org/data/2.5/weather?q=delhi&appid=ab9d0f012538d749a4c2d5456124e573";
+        var request = new XMLHttpRequest();
+        request.open('GET',link,true);
+        request.onload= function(){
+            var obj = JSON.parse(this.response);
+            console.log(obj);
+            document.getElementById('Weather').innerHTML=obj.weather[0].description;
+              document.getElementById('location').innerHTML=obj.name;
+                document.getElementById('temp').innerHTML= Math.round(obj.main.temp-273.15);
+                  document.getElementById('icon').src="https://openweathermap.org/img/w/" + obj.weather[0].icon + ".png"
+        }
+        if(request.status >= 200 && request.status < 400){
+         var temp = obj.main.temp;
+        }
+        else{
+            console.log("The city data is not available")
+        }
+        request.send();
+    </script>
+</body>
+</html>
